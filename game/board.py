@@ -9,6 +9,9 @@ class Board:
         self.board[6] = ["p"]*8
         self.board[7] = ["r","n","b","q","k","b","n","r"]
 
+        self.current_player = "white"  # 白先手
+        self.game_over = False         # 遊戲狀態
+
     def print_board(self):
         print("  a b c d e f g h")
         for i, row in enumerate(self.board):
@@ -31,6 +34,41 @@ class Board:
         piece = self.board[start_row][start_col]
         self.board[end_row][end_col] = piece
         self.board[start_row][start_col] = " "
+
+        # ---- 新增規則檢查 ----
+        if piece == " ":
+            print("那裡沒有棋子！")
+            return
+
+        if self.current_player == "white" and piece.isupper():
+            print("這不是你的棋子！")
+            return
+        elif self.current_player == "black" and piece.islower():
+            print("這不是你的棋子！")
+            return
+        # ----------------------
+
+        target = self.board[end_row][end_col]
+
+        # 吃 King 結束遊戲
+        if target.lower() == "k":
+            print(self.current_player, "wins!")
+            self.game_over = True
+
+        # 移動棋子
+        self.board[end_row][end_col] = piece
+        self.board[start_row][start_col] = " "
+
+        # 換回合
+        self.switch_turn()
+
+    def switch_turn(self):
+        if self.current_player == "white":
+            self.current_player = "black"
+            print("現在是黑方回合")
+        else:
+            self.current_player = "white"    
+            print("現在是白方回合")
 
 if __name__ == "__main__":
     b = Board()
