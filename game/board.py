@@ -20,6 +20,9 @@ class Board:
 
 
     def move_piece(self, move):
+        if self.game_over:
+            print("遊戲已結束")
+            return
         """
         move: 字串，像 "e2 e4"
         功能: 將棋子從起點移到終點
@@ -30,10 +33,7 @@ class Board:
         end_col = ord(end[0]) - ord('a')
         end_row = 8 - int(end[1])
 
-        # 移動棋子
         piece = self.board[start_row][start_col]
-        self.board[end_row][end_col] = piece
-        self.board[start_row][start_col] = " "
 
         # ---- 新增規則檢查 ----
         if piece == " ":
