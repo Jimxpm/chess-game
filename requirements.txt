@@ -1,0 +1,11 @@
+2️⃣ VS Code 設定
+
+安裝擴充套件：
+
+Python（官方 Microsoft）
+
+Pylance（強化自動補齊與提示）
+
+Jupyter（如果想開 notebook）
+
+GitLens（可選，加強 Git 管理）
